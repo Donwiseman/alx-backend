@@ -3,6 +3,7 @@
 
 
 def index_range(page, page_size):
+    """Returns the start and end name number of a given page."""
     start_num = 0
     end_num = 0
     for pg in range(page):
