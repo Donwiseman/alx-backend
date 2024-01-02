@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+"""Implements pagination of csv file."""
 import csv
 import math
 from typing import List
