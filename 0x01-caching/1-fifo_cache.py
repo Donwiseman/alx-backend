@@ -10,8 +10,8 @@ class FIFOCache(BaseCaching):
     def put(self, key, item):
         """adds a item to the FIFO cache"""
         if key is not None and item is not None:
-            if (len(self.cache_data) < BaseCaching.MAX_ITEMS) or
-            (key in self.cache_data.keys()):
+            if (len(self.cache_data) < BaseCaching.MAX_ITEMS) \
+                    or (key in self.cache_data.keys()):
                 self.cache_data[key] = item
             else:
                 for index, (c_key, val) in enumerate(self.cache_data.items()):
