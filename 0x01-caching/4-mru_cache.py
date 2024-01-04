@@ -27,7 +27,7 @@ class MRUCache(BaseCaching):
                 discard_item_key = None
                 # finds the key with highest mru point
                 for mru_key, point in self.mru_mapper.items():
-                    if point > mru_point:
+                    if point >= mru_point:
                         mru_point = point
                         discard_item_key = mru_key
                 print(f"DISCARD: {discard_item_key}")
