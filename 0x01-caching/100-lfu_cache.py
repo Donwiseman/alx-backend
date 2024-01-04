@@ -30,12 +30,13 @@ class LFUCache(BaseCaching):
             else:
                 lfU_val = list(self.lfu_mapper.values())[0]
                 discard_item_key = None
-                # finds minimal frequency 
+                # finds minimal frequency
                 for val in self.lfu_mapper.values():
                     if val < lfU_val:
                         lfU_val = val
                 # creates a list of keys having the LFU valuue
-                lfu_discard_list = [lfu_key for lfu_key, val in self.lfu_mapper.items() if val == lfU_val]
+                lfu_discard_list = [lfu_key for lfu_key, val in
+                                    self.lfu_mapper.items() if val == lfU_val]
                 if len(lfu_discard_list) == 1:
                     discard_item_key = lfu_discard_list[0]
                 else:
