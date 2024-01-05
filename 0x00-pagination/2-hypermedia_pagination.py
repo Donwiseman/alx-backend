@@ -41,7 +41,7 @@ class Server:
         pg = index_range(page, page_size)
         self.dataset()
         return self.__dataset[pg[0]: pg[1]]
-    
+
     def get_hyper(self, page: int = 1, page_size: int = 10) -> List[List]:
         """returns the requested page in hypermedia format"""
         data = self.get_page(page, page_size)
