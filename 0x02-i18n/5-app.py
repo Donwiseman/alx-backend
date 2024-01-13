@@ -30,15 +30,19 @@ class Config:
 app.config.from_object(Config)
 
 
-@app.before_request
 def get_user():
     """Gets the user details if information passed"""
     try:
         user_key = int(request.args.get('login_as'))
-        g.user = users.get(user_key, None)
-        print(g.user)
+        return users.get(user_key, None)
     except EXCEPTION:
-        g.user = None
+        return None
+
+
+@app.before_request
+def before_request():
+    """Sets the global g.user."""
+    g.user = get_user()
 
 
 @babel.localeselector
