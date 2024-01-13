@@ -5,5 +5,10 @@
 	</head>
 	<body>
 		<h1>{{ _('home_header') }}</h1>
+	{% if username %}
+		<h3>{{ _('logged_in_as', username=username) }}</h3>
+	{% else %}
+		<h3>{{ _('not_logged_in') }}</h3>
+	{% endif %}
 	</body>
 </html>

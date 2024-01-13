@@ -18,7 +18,7 @@ users = {
 class Config:
     """Set default configurations for the application."""
     # Set the available languages
-    LANGUAGES = ['en', 'es', 'fr']
+    LANGUAGES = ['en', 'fr']
 
     # Set the default language
     BABEL_DEFAULT_LOCALE = 'en'
@@ -29,28 +29,34 @@ class Config:
 
 app.config.from_object(Config)
 
+
 @app.before_request
 def get_user():
     """Gets the user details if information passed"""
-    user_key = request.args.get('login_as')
-    if user_key:
-        user = users.get(user_key, None)
-    if user:
-        get_locale(user["locale"])
+    try:
+        user_key = int(request.args.get('login_as'))
+        g.user = users.get(user_key, None)
+        print(g.user)
+    except EXCEPTION:
+        g.user = None
 
 
 @babel.localeselector
 def get_locale(lang=None):
     """Selector for appropraite URL language in request."""
-    if lang:
-        return lang
+    if g.user:
+        return g.user["locale"]
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
 @app.route('/', strict_slashes=False)
 def home():
     """ Homepage of website. """
-    return render_template('5-index.html')
+    username = None
+    if g.user:
+        print(g.user)
+        username = g.user.get("name", None)
+    return render_template('5-index.html', username=username)
 
 
 if __name__ == "__main__":
