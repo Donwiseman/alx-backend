@@ -26,6 +26,7 @@ app.config.from_object(Config)
 
 @babel.localeselector
 def get_locale():
+    """Selector for appropraite URL language in request."""
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
