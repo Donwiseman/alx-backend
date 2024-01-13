@@ -35,7 +35,7 @@ def get_user():
     try:
         user_key = int(request.args.get('login_as'))
         return users.get(user_key, None)
-    except EXCEPTION:
+    except Exception:
         return None
 
 
@@ -46,12 +46,12 @@ def before_request():
 
 
 @babel.localeselector
-def get_locale(lang=None):
+def get_locale():
     """Selector for appropraite URL language in request."""
-    lang = request.args.get('locale')
+    lang = request.args.get('locale', None)
     if lang:
         return lang
-    if g.user.get("locale", None):
+    if g.user and g.user.get("locale", None) in ["en", "fr"]:
         return g.user["locale"]
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 

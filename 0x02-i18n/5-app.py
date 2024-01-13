@@ -35,7 +35,7 @@ def get_user():
     try:
         user_key = int(request.args.get('login_as'))
         return users.get(user_key, None)
-    except EXCEPTION:
+    except Exception:
         return None
 
 
